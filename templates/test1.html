@@ -4,8 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *,*::before,*::after{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .error{
+            background: red;
+            color: white;
+        }
+        .data{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .quote{
+            display: flex;
+            flex-direction: column;
+            width:40vw;
+            margin: 10px 50px;
+            border: 2px solid black;
+            border-radius: 20px;
+            padding: 10px 25px;
+            
+        }
+        #authorQuote{
+            order:1;
+        }
+        #authorName{
+            order:2;
+            padding-left: 40px;
+        }
+        #authorName::before{
+            content: " - ";
+        }
+    </style>
 </head>
 <body>
-    <h1>{{name}}</h1><span>, This is ur first flask app</span>
+    <div align="center" style="background-color:grey;color: black;">
+    <h1 >QUOTES STORED IN DATABASE TO WEBPAGE</h1>
+    </div>
+    {% if data %}
+    
+    <div class="data">
+            {% for i in data %}
+            <div class="quote">
+                <!-- <span>{{i.id}}</span> -->
+                <span id="authorName">{{i.name}}</span>
+                <span id="authorQuote">{{i.quote}}</span>
+            </div>
+            
+            {% endfor %}
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="error">
+        {{error}}
+    </div>
+    {% endif %}
 </body>
 </html>
